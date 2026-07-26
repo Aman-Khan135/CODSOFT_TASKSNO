@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer Portfolio</title>
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Integrated CSS -->
+    <style>
+        /* --- Global Styles & CSS Variables --- */
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --text-color: #c9d1d9;
+            --text-heading: #f0f6fc;
+            --main-color: #58a6ff;
+            --accent-color: #238636;
+            --error-color: #f85149;
+            --border-color: #30363d;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        section {
+            min-height: 100vh;
+            padding: 6rem 9% 2rem;
+        }
+
+        .heading {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--text-heading);
+        }
+
+        .heading span {
+            color: var(--main-color);
+        }
+
+        /* --- Buttons --- */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.8rem;
+            background: var(--main-color);
+            color: #000;
+            font-weight: 600;
+            border-radius: 6px;
+            text-decoration: none;
+            border: 2px solid var(--main-color);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: transparent;
+            color: var(--main-color);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--main-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--main-color);
+            color: #000;
+        }
+
+        /* --- Header & Navigation --- */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.2rem 9%;
+            background: rgba(13, 17, 23, 0.95);
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            color: var(--text-heading);
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--main-color);
+        }
+
+        .navbar a {
+            font-size: 1rem;
+            color: var(--text-color);
+            text-decoration: none;
+            margin-left: 2rem;
+            transition: var(--transition);
+        }
+
+        .navbar a:hover,
+        .navbar a.active {
+            color: var(--main-color);
+        }
+
+        .menu-btn {
+            font-size: 1.5rem;
+            color: var(--text-color);
+            cursor: pointer;
+            display: none;
+        }
+
+        /* --- Home Section --- */
+        .home {
+            display: flex;
+            align-items: center;
+        }
+
+        .home-content h3 {
+            font-size: 1.5rem;
+        }
+
+        .home-content h1 {
+            font-size: 3.5rem;
+            color: var(--text-heading);
+            margin: 0.5rem 0;
+        }
+
+        .text-animate {
+            color: var(--main-color);
+        }
+
+        .home-content p {
+            max-width: 600px;
+            margin: 1rem 0 2rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 2.5rem;
+            height: 2.5rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            color: var(--main-color);
+            margin-right: 1rem;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--main-color);
+            color: #000;
+            transform: translateY(-3px);
+        }
+
+        /* --- About Section --- */
+        .about-container {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            color: var(--text-heading);
+            margin-bottom: 1rem;
+        }
+
+        .about-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        /* --- Skills Section --- */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .skill-card i {
+            font-size: 3rem;
+            color: var(--main-color);
+            margin-bottom: 1rem;
+        }
+
+        .skill-card h3 {
+            color: var(--text-heading);
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--main-color);
+        }
+
+        /* --- Projects Section --- */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--main-color);
+        }
+
+        .project-img img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .project-info {
+            padding: 1.5rem;
+        }
+
+        .project-info h3 {
+            color: var(--text-heading);
+            margin-bottom: 0.5rem;
+        }
+
+        .tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+        }
+
+        .tags span {
+            background: rgba(88, 166, 255, 0.1);
+            color: var(--main-color);
+            padding: 0.2rem 0.6rem;
+            font-size: 0.8rem;
+            border-radius: 4px;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .project-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .project-links a:hover {
+            color: var(--main-color);
+        }
+
+        /* --- Resume Section --- */
+        .resume-container {
+            text-align: center;
+            background: var(--card-bg);
+            padding: 3rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .resume-container p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* --- Contact Section --- */
+        #contact-form {
+            max-width: 700px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .input-box {
+            display: flex;
+            gap: 1.2rem;
+        }
+
+        .input-field {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-field input,
+        .input-field textarea {
+            width: 100%;
+            padding: 1rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-color);
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .input-field input:focus,
+        .input-field textarea:focus {
+            border-color: var(--main-color);
+        }
+
+        .input-field.error input,
+        .input-field.error textarea {
+            border-color: var(--error-color);
+        }
+
+        .error-msg {
+            color: var(--error-color);
+            font-size: 0.8rem;
+            margin-top: 0.3rem;
+        }
+
+        .form-status {
+            margin-top: 1rem;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        /* --- Footer --- */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            background: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* --- Mobile Responsiveness --- */
+        @media (max-width: 768px) {
+            .menu-btn {
+                display: block;
+            }
+
+            .navbar {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                padding: 1rem 9%;
+                background: var(--bg-color);
+                border-bottom: 1px solid var(--border-color);
+                display: none;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .navbar.active {
+                display: flex;
+            }
+
+            .navbar a {
+                margin-left: 0;
+            }
+
+            .input-box {
+                flex-direction: column;
+            }
+
+            .home-content h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navigation -->
+    <header class="header">
+        <a href="#home" class="logo">Developer<span>.Portfolio</span></a>
+        <nav class="navbar">
+            <a href="#home" class="nav-link active">Home</a>
+            <a href="#about" class="nav-link">About</a>
+            <a href="#skills" class="nav-link">Skills</a>
+            <a href="#projects" class="nav-link">Projects</a>
+            <a href="#resume" class="nav-link">Resume</a>
+            <a href="#contact" class="nav-link">Contact</a>
+        </nav>
+        <div class="menu-btn" id="menu-btn">
+            <i class="fas fa-bars"></i>
+        </div>
+    </header>
+
+    <!-- Home Section -->
+    <section class="home" id="home">
+        <div class="home-content">
+            <h3>Hello, I'm</h3>
+            <h1>Aman Khan</h1>
+            <h3>And I'm a <span class="text-animate">Software Developer</span></h3>
+            <p>Passionate about building scalable applications, efficient data structures, and intuitive user interfaces.</p>
+            <div class="btn-group">
+                <a href="#contact" class="btn">Hire Me</a>
+                <a href="#projects" class="btn btn-outline">View Projects</a>
+            </div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <h2 class="heading">About <span>Me</span></h2>
+        <div class="about-container">
+            <div class="about-text">
+                <h3>Problem Solver & Code Enthusiast</h3>
+                <p>I am a developer driven by core computer science fundamentals, algorithm efficiency, and modern web tech. From clean backend logic to smooth frontend interactions, I focus on building robust end-to-end applications.</p>
+                <div class="about-info">
+                    <div><strong>Degree:</strong> B.Tech Computer Science and Engineering</div>
+                    <div><strong>Location:</strong> Open to Remote / On-site</div>
+                    <div><strong>Focus:</strong> Full Stack Development</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills" id="skills">
+        <h2 class="heading">My <span>Skills</span></h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <i class="fab fa-java"></i>
+                <h3>Java & DSA</h3>
+                <p>Object-Oriented Programming, Data Structures, Algorithms</p>
+            </div>
+            <div class="skill-card">
+                <i class="fab fa-js-square"></i>
+                <h3>JavaScript</h3>
+                <p>ES6+, DOM Manipulation, Async/Await, Web APIs</p>
+            </div>
+            <div class="skill-card">
+                <i class="fab fa-html5"></i>
+                <h3>HTML5 & CSS3</h3>
+                <p>Responsive Layouts, Flexbox, Grid, Animations</p>
+            </div>
+            <div class="skill-card">
+                <i class="fas fa-database"></i>
+                <h3>Databases</h3>
+                <p>SQL, Schema Design, Query Optimization</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects" id="projects">
+        <h2 class="heading">Latest <span>Projects</span></h2>
+        <div class="projects-grid">
+            
+            <!-- Project Card 1 -->
+            <div class="project-card">
+                <div class="project-img">
+                    <img src="https://via.placeholder.com/400x250" alt="Algorithm Visualizer">
+                </div>
+                <div class="project-info">
+                    <h3>Algorithm Visualizer</h3>
+                    <p>An interactive tool visualizing sorting algorithms and graph traversals in real time.</p>
+                    <div class="tags">
+                        <span>Java</span><span>JS</span><span>CSS Grid</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Demo</a>
+                        <a href="#" target="_blank"><i class="fab fa-github"></i> Code</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project Card 2 -->
+            <div class="project-card">
+                <div class="project-img">
+                    <img src="https://via.placeholder.com/400x250" alt="Task Management System">
+                </div>
+                <div class="project-info">
+                    <h3>Task Management System</h3>
+                    <p>A full-stack productivity web app with authentication and dynamic data persistence.</p>
+                    <div class="tags">
+                        <span>HTML/CSS</span><span>JS</span><span>REST API</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Demo</a>
+                        <a href="#" target="_blank"><i class="fab fa-github"></i> Code</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project Card 3 -->
+            <div class="project-card">
+                <div class="project-img">
+                    <img src="https://via.placeholder.com/400x250" alt="OS Disk Allocation Simulator">
+                </div>
+                <div class="project-info">
+                    <h3>OS Allocator Simulator</h3>
+                    <p>Simulates operating system disk allocation strategies and memory management logic.</p>
+                    <div class="tags">
+                        <span>C/C++</span><span>Algorithms</span><span>OS</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Demo</a>
+                        <a href="#" target="_blank"><i class="fab fa-github"></i> Code</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Resume Section -->
+    <section class="resume" id="resume">
+        <h2 class="heading">My <span>Resume</span></h2>
+        <div class="resume-container">
+            <p>Download my updated resume to view my complete experience and qualifications.</p>
+            <a href="resume.pdf" download="Alex_Morgan_Resume.pdf" class="btn btn-download">
+                <i class="fas fa-download"></i> Download Resume (PDF)
+            </a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <h2 class="heading">Contact <span>Me</span></h2>
+        <form id="contact-form" novalidate>
+            <div class="input-box">
+                <div class="input-field">
+                    <input type="text" id="name" placeholder="Full Name">
+                    <small class="error-msg"></small>
+                </div>
+                <div class="input-field">
+                    <input type="email" id="email" placeholder="Email Address">
+                    <small class="error-msg"></small>
+                </div>
+            </div>
+            <div class="input-field">
+                <input type="text" id="subject" placeholder="Subject">
+                <small class="error-msg"></small>
+            </div>
+            <div class="input-field">
+                <textarea id="message" rows="6" placeholder="Your Message"></textarea>
+                <small class="error-msg"></small>
+            </div>
+            <button type="submit" class="btn">Send Message</button>
+            <div id="form-status" class="form-status"></div>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2026 Alex Morgan. Built with HTML, CSS, and JS.</p>
+    </footer>
+
+    <!-- Integrated JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. Mobile Menu Toggle
+            const menuBtn = document.getElementById('menu-btn');
+            const navbar = document.querySelector('.navbar');
+
+            menuBtn.addEventListener('click', () => {
+                navbar.classList.toggle('active');
+                menuBtn.querySelector('i').classList.toggle('fa-xmark');
+            });
+
+            // Close mobile menu when a link is clicked
+            document.querySelectorAll('.navbar a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navbar.classList.remove('active');
+                    menuBtn.querySelector('i').classList.remove('fa-xmark');
+                });
+            });
+
+            // 2. Active Link Highlighting on Scroll
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.navbar a');
+
+            window.addEventListener('scroll', () => {
+                let current = '';
+
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    
+                    if (window.pageYOffset >= (sectionTop - sectionHeight / 3)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').includes(current)) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+
+            // 3. Contact Form Validation
+            const form = document.getElementById('contact-form');
+            const nameInput = document.getElementById('name');
+            const emailInput = document.getElementById('email');
+            const subjectInput = document.getElementById('subject');
+            const messageInput = document.getElementById('message');
+            const formStatus = document.getElementById('form-status');
+
+            function showError(input, message) {
+                const field = input.parentElement;
+                field.classList.add('error');
+                const small = field.querySelector('.error-msg');
+                small.innerText = message;
+            }
+
+            function clearError(input) {
+                const field = input.parentElement;
+                field.classList.remove('error');
+                const small = field.querySelector('.error-msg');
+                small.innerText = '';
+            }
+
+            function isValidEmail(email) {
+                const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                return re.test(String(email).toLowerCase());
+            }
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                let isValid = true;
+
+                [nameInput, emailInput, subjectInput, messageInput].forEach(clearError);
+                formStatus.innerText = '';
+
+                if (nameInput.value.trim() === '') {
+                    showError(nameInput, 'Full Name is required.');
+                    isValid = false;
+                }
+
+                if (emailInput.value.trim() === '') {
+                    showError(emailInput, 'Email Address is required.');
+                    isValid = false;
+                } else if (!isValidEmail(emailInput.value.trim())) {
+                    showError(emailInput, 'Please enter a valid email address.');
+                    isValid = false;
+                }
+
+                if (subjectInput.value.trim() === '') {
+                    showError(subjectInput, 'Subject is required.');
+                    isValid = false;
+                }
+
+                if (messageInput.value.trim() === '') {
+                    showError(messageInput, 'Message is required.');
+                    isValid = false;
+                }
+
+                if (isValid) {
+                    formStatus.style.color = '#238636';
+                    formStatus.innerText = 'Thank you! Your message has been validated and sent successfully.';
+                    form.reset();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Task Manager</title>
+    <link rel="stylesheet" href="task2nd.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>Task Manager</h1>
+            <button id="theme-toggle" aria-label="Toggle Dark Mode">🌙</button>
+        </header>
+
+        <section class="task-stats">
+            <div class="stat-box">Pending: <span id="pending-count">0</span></div>
+            <div class="stat-box">Completed: <span id="completed-count">0</span></div>
+        </section>
+
+        <form id="task-form">
+            <input type="text" id="task-input" placeholder="What needs to be done?" required>
+            
+            <div class="form-options">
+                <select id="task-category">
+                    <option value="General">General</option>
+                    <option value="Work">Work</option>
+                    <option value="Personal">Personal</option>
+                    <option value="Study">Study</option>
+                </select>
+                
+                <select id="task-priority">
+                    <option value="Low">Low Priority</option>
+                    <option value="Medium" selected>Medium Priority</option>
+                    <option value="High">High Priority</option>
+                </select>
+                
+                <input type="date" id="task-due-date">
+                <button type="submit" id="add-btn">Add Task</button>
+            </div>
+        </form>
+
+        <section class="filters">
+            <input type="text" id="search-input" placeholder="Search tasks...">
+            <select id="filter-status">
+                <option value="All">All Statuses</option>
+                <option value="Pending">Pending</option>
+                <option value="Completed">Completed</option>
+            </select>
+            <select id="filter-priority">
+                <option value="All">All Priorities</option>
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+                <option value="Low">Low</option>
+            </select>
+        </section>
+
+        <ul id="task-list"></ul>
+    </div>
+
+    <script src="TasK2.js"></script>
+</body>
+</html>
